@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <link href='img/favicon.png' rel='shortcut icon'>
+    <title>Timer CoR</title>
+    <link href="./style.css" rel="stylesheet">
+    
+    <!-- *** -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- *** -->
+    
+</head>
+    
+
+    
+
+<body>
+<h1 align="center">Competencia Robótica 2020</h1> 
+<h2 align="center">Universidad Técnica Federico Santa María</h2> 
+
+<br>
+<br>
+<br>
+<ul class="countdown">
+    <li>
+        <span id='timer'>00:00,000</span>
+        
+    </li>
+</ul>
+<br>
+
+
+  
+<div align="center" class="clock-buttons">
+    <button onclick='startTimer()' type="button" class="clock-button clock-button--start">
+        <span class="clock-button__text">Start</span>
+    </button>
+
+    <button onclick='stopTimer()' type="button" class="clock-button">
+        <span class="clock-button__text">Stop</span>
+    </button>
+
+    <button onclick='clearTimer()' type="button" class="clock-button clock-button--pause">
+        <span class="clock-button__text">Reset</span>
+    </button>
+</div>
+    
+<a href="#"><img id="logo_l" src="img/logos/IRE_negro.png"></a>
+<a href="#"><img id="logo_r" src="img/logos/cor_negro.png"></a>
+
+
+    <!--<div style="background-image: url('fondo_4k.png');">-->
+<div class="container text-center my-4">
+<br>
+<br>
+<br>
+<br>
+
+
+
+    
+    <!--
+    <p class="font-weight-bold">Puntajes Categoría Robotracer</p>
+    <p><button onclick="sortTable()">Ordenar</button></p>
+        
+    <a class="btn btn-primary mb-4" href="https://docs.google.com/spreadsheets/d/1kFyi2N_Akc1qW10yGpQQiRglSibKKtVjR7Dvw4kYXaU/edit?usp=sharing" role="button" target="_blank">Click to see the source sheet</a>
+        
+    -->
+
+
+    <!-- Table  -->
+    <table class="table table bordered table-striped" id="testTable">
+        <!-- Table head -->
+        <thead>
+          <tr>
+            <th>Lugar</th>
+            <th>Equipo</th>
+            <th>Puntaje</th>
+          </tr>
+        </thead>
+        <!-- Table head -->
+
+        <!-- Table body -->
+        <tbody id="demo">
+
+
+        </tbody>
+        <!-- Table body -->
+    </table>
+    <!-- Table  -->
+
+    </div>
+
+    <!-- Start your project here-->
+      
+    <!-- /Start your project here-->
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+
+
+
+<script type="text/javascript">
+   
+   //$.getJSON("https://spreadsheets.google.com/feeds/list/1kFyi2N_Akc1qW10yGpQQiRglSibKKtVjR7Dvw4kYXaU/od6/public/values?alt=json",
+    $.getJSON("https://spreadsheets.google.com/feeds/list/1kFyi2N_Akc1qW10yGpQQiRglSibKKtVjR7Dvw4kYXaU/3/public/values?alt=json", 
+     
+    function(data) {
+        var sheetData = data.feed.entry;
+        var i;
+        
+        for (i = 0; i < sheetData.length; i++) {
+            var name = data.feed.entry[i]['gsx$_cn6ca']['$t'];
+            var age = data.feed.entry[i]['gsx$_cokwr']['$t'];
+            var email = data.feed.entry[i]['gsx$_cpzh4']['$t'];
+            document.getElementById('demo').innerHTML += ('<tr>' + '<td>' + name + '</td>' + '<td>' + age + '</td>' + '<td>' + email + '</td>' + '</tr>');
+        }
+        
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("testTable");
+        switching = true;
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[0];
+                y = rows[i + 1].getElementsByTagName("TD")[0];
+                //check if the two rows should switch place:
+                if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    });
+        
+    
+                            
+</script>
+
+
+
+    <!--
+    <script class="source" type="text/javascript">  
+        Poner un texto bonito aqui :s
+    </script>
+    -->
+    
+    <!--
+    <script class="source" type="text/javascript">
+        
+        $('.countdown').downCount({
+            date: '06/10/2013 12:00:00',
+            offset: +10
+        }, function () {
+            alert('WOOT WOOT, done!');
+        });
+        
+    </script>
+    <a href="https://github.com/sonnyt/downCount" class="btn">Fork Me</a>
+    
+
+
+    -->
+    
+<script src="./script.js"></script> 
+    
+</body>
+</html>

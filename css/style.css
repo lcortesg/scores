@@ -1,0 +1,12 @@
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.placeholder {
+  font-size: 12px;
+}
